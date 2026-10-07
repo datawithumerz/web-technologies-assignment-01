@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 2: Web Applications and Architecture | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top"><div class="container"><a class="site-title" href="index.html">Web Technologies</a><p>How web systems are organised</p></div></header>
+    <nav class="top-nav" aria-label="Lecture navigation"><div class="container">
+        <a href="index.html">Home</a><a href="lecture1.html">1</a><a class="current" href="lecture2.html" aria-current="page">2</a><a href="lecture3.html">3</a><a href="lecture4.html">4</a><a href="lecture5.html">5</a><a href="lecture6.html">6</a>
+    </div></nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 2</p>
+        <h1>Web Applications and Architecture</h1>
+        <p class="intro">A page of course information and a student results portal both run on the Web, but they have different needs. Application types describe how the experience works. Architecture describes how its responsibilities are organised.</p>
+        <div class="contents"><p><strong>On this page</strong></p><ul><li><a href="#standards">HTML history and web standards</a></li><li><a href="#types">Types of web applications</a></li><li><a href="#tiers">Layers and tiers</a></li><li><a href="#portal">A university portal example</a></li><li><a href="#choosing">Choosing an architecture</a></li></ul></div>
+        <section id="standards">
+            <h2>1. Why web standards matter</h2>
+            <p>A web standard describes agreed ways for a technology to work. If browsers interpret the same HTML consistently, developers can write one page that works for many visitors. Without shared rules, pages may depend on features supported by only one browser.</p>
+            <p>The Web began with Tim Berners-Lee's work on sharing linked information. Early HTML focused on documents and hyperlinks. HTML later developed richer ways to describe content. XHTML applied stricter XML-style syntax, while the work that led to HTML5 placed strong emphasis on useful browser features and compatibility with existing pages.</p>
+            <p>HTML5 brought attention to semantic elements, native audio and video, and improved forms. These features let a page describe more of its meaning directly in HTML.</p>
+            <div class="table-wrap"><table><caption>Organisations involved in web standards</caption><thead><tr><th scope="col">Organisation</th><th scope="col">Connection to the Web</th></tr></thead><tbody>
+                <tr><td>W3C</td><td>The World Wide Web Consortium develops standards and guidance across web technologies.</td></tr>
+                <tr><td>WHATWG</td><td>The Web Hypertext Application Technology Working Group develops the HTML Living Standard.</td></tr>
+                <tr><td>Ecma International</td><td>Standardises ECMAScript, the language specification associated with JavaScript.</td></tr>
+                <tr><td>IETF</td><td>The Internet Engineering Task Force develops Internet protocol specifications, including HTTP-related standards.</td></tr>
+            </tbody></table></div>
+            <p>For a beginner, the practical lesson is to use meaningful elements, valid nesting and supported properties. A browser may recover from a mistake, but that does not make the original markup correct.</p>
+        </section>
+        <section id="types">
+            <h2>2. Static and dynamic applications</h2>
+            <h3>Static websites</h3>
+            <p>A static website serves files prepared in advance. When a visitor requests a page, the server sends the existing file. A personal portfolio, course guide or small information website can work this way.</p>
+            <p>To change the written content, the developer edits the file and publishes the update. Static pages can still have useful navigation, styled links and HTML form controls.</p>
+            <pre><code>&lt;h2&gt;Available courses&lt;/h2&gt;
+&lt;ul&gt;
+    &lt;li&gt;Web Technologies&lt;/li&gt;
+    &lt;li&gt;Operating Systems&lt;/li&gt;
+&lt;/ul&gt;
+&lt;a href="lecture3.html"&gt;Learn to write HTML&lt;/a&gt;</code></pre>
+            <p>This list is written directly into the HTML. It will not automatically update when a university changes its course database.</p>
+            <h3>Dynamic applications</h3>
+            <p>A dynamic application uses data or processing to produce or update content. A student portal may show different marks to different students. The system identifies the student, obtains the appropriate records and returns the result.</p>
+            <p>The difference concerns where the content comes from. A page does not become a dynamic database application simply because a link changes colour when you hover over it.</p>
+            <h3>MPA, SPA and PWA</h3>
+            <div class="table-wrap"><table><caption>Different ways to deliver a web experience</caption><thead><tr><th scope="col">Type</th><th scope="col">How it works</th><th scope="col">Example</th></tr></thead><tbody>
+                <tr><td>Multi-Page Application (MPA)</td><td>Navigation loads separate documents or pages.</td><td>Following a link from a home page to a lecture page.</td></tr>
+                <tr><td>Single-Page Application (SPA)</td><td>One main document remains while programmed behaviour changes its views and content.</td><td>A mail interface that switches views without replacing the whole page.</td></tr>
+                <tr><td>Progressive Web App (PWA)</td><td>A web application offers additional app-like capabilities, such as installation or supported offline features.</td><td>A web learning app that can be installed.</td></tr>
+            </tbody></table></div>
+            <div class="note"><p><strong>These categories can overlap.</strong> Static or dynamic describes content delivery. MPA or SPA describes navigation. PWA describes additional capabilities. A site does not have to pass through these categories in a fixed order.</p></div>
+        </section>
+        <section id="tiers">
+            <h2>3. Layers and tiers</h2>
+            <p>A <strong>layer</strong> groups a logical responsibility, such as displaying information or checking a rule. A <strong>tier</strong> describes a deployment separation: where a component runs. Several logical layers can run within one tier.</p>
+            <p>This distinction matters because splitting code into three files does not automatically create a three-tier system. The files might all run in the same environment.</p>
+            <h3>One-tier architecture</h3>
+            <p>The interface, processing and data are kept in one environment. A local inventory program that uses a local data file is a useful example. Setup is straightforward, but this arrangement is a poor fit for a large web system with many independent users.</p>
+            <h3>Two-tier architecture</h3>
+            <p>A client communicates directly with a server or data service. The client often handles the interface and some application rules. This can be suitable for a small system, but tightly combining rules and data access can make future changes harder.</p>
+            <h3>Three-tier architecture</h3>
+            <p>A common web design separates three responsibilities:</p>
+            <ol>
+                <li><strong>Presentation:</strong> the interface that the visitor sees and uses.</li>
+                <li><strong>Application:</strong> processing, permissions and business rules.</li>
+                <li><strong>Data:</strong> stored records and their retrieval.</li>
+            </ol>
+            <p>The browser communicates with the application, which accesses the data. This separation lets the application check what a user is allowed to do before reading or changing records. An <strong>N-tier</strong> system extends the idea with additional deployment tiers when needed.</p>
+        </section>
+        <section id="portal">
+            <h2>4. Follow a request through a student portal</h2>
+            <p>Imagine a student opening a page to view marks. The interface displays the request, but the application must decide which records that student can see.</p>
+            <div class="table-wrap"><table><caption>Responsibilities in a three-tier portal</caption><thead><tr><th scope="col">Tier</th><th scope="col">What happens</th></tr></thead><tbody>
+                <tr><td>Presentation</td><td>The browser displays the student dashboard and a marks table.</td></tr>
+                <tr><td>Application</td><td>The server checks the signed-in student and requests only that student's marks.</td></tr>
+                <tr><td>Data</td><td>The database stores users, courses and marks and returns the requested records.</td></tr>
+            </tbody></table></div>
+            <p>Changing the colour of the marks table belongs to presentation. Checking whether a teacher can edit marks belongs to application logic. Saving the final marks belongs to the data responsibility.</p>
+            <p>A plain HTML table can demonstrate the interface, but it does not create authentication, enforce permissions or connect to a database by itself.</p>
+        </section>
+        <section id="choosing">
+            <h2>5. Choosing an architecture</h2>
+            <p>More tiers create more work to deploy and maintain, so extra separation should solve a real problem. Consider the size of the system, how many people will use it, and how often it will change.</p>
+            <ul><li><strong>Scalability:</strong> can the system handle more users or data?</li><li><strong>Maintainability:</strong> can one part change without forcing unnecessary changes elsewhere?</li><li><strong>Cost:</strong> what equipment, hosting and maintenance effort does the design need?</li></ul>
+            <p>A small guide with fixed lesson content can use static HTML files. A portal containing private student records needs additional application and data handling. Start with the responsibilities the system actually has.</p>
+        </section>
+        <div class="practice"><p><strong>Check your understanding</strong></p><ol><li>Explain why a static website can still contain working links.</li><li>Is a three-file website automatically three-tier? Explain why.</li><li>Place these tasks in the correct tier: changing a heading colour, checking permission to edit a mark, storing the mark.</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="lecture1.html">&larr; Previous lecture</a><a href="index.html">Home</a><a href="lecture3.html">Next: HTML basics &rarr;</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 2</p></footer>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 4: HTML5, Semantic Elements and Forms | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top"><div class="container"><a class="site-title" href="index.html">Web Technologies</a><p>Meaningful pages and useful forms</p></div></header>
+    <nav class="top-nav" aria-label="Lecture navigation"><div class="container">
+        <a href="index.html">Home</a><a href="lecture1.html">1</a><a href="lecture2.html">2</a><a href="lecture3.html">3</a><a class="current" href="lecture4.html" aria-current="page">4</a><a href="lecture5.html">5</a><a href="lecture6.html">6</a>
+    </div></nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 4</p>
+        <h1>HTML5, Semantic Elements and Forms</h1>
+        <p class="intro">A page should describe its purpose clearly, both to readers and to the software that reads it. Semantic elements give sections meaning. Forms let visitors enter information in a structured way.</p>
+        <div class="contents"><p><strong>On this page</strong></p><ul><li><a href="#html5">HTML5 and containers</a></li><li><a href="#semantics">Semantic page structure</a></li><li><a href="#forms">How forms work</a></li><li><a href="#controls">Input types and other controls</a></li><li><a href="#validation">Validation and form practice</a></li><li><a href="#accessibility">Accessibility</a></li></ul></div>
+        <section id="html5">
+            <h2>1. HTML5 and the meaning of a page</h2>
+            <p>HTML5 includes elements for page structure, native audio and video, and form controls such as email, number and date inputs. These features help browsers understand content and offer suitable controls.</p>
+            <p>The viewport meta tag helps mobile browsers use the device width when laying out a page. Flexible CSS widths still matter: the tag alone cannot fix a page filled with oversized boxes.</p>
+            <pre><code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code></pre>
+            <p>Related browser features include <code>&lt;canvas&gt;</code> for drawing with scripting, <code>localStorage</code> for browser storage that can persist across sessions, and <code>sessionStorage</code> for storage associated with a page session. Storage and canvas drawing require scripting to use; adding ordinary HTML elements alone does not implement them.</p>
+            <h3>Block, inline, div and span</h3>
+            <p>A block element normally begins on a new line. Paragraphs and <code>&lt;div&gt;</code> containers commonly behave this way. Inline elements, such as <code>&lt;span&gt;</code> and <code>&lt;strong&gt;</code>, flow within a line of text.</p>
+            <pre><code>&lt;div class="note"&gt;
+    &lt;p&gt;Learn &lt;span class="topic"&gt;HTML&lt;/span&gt; one example at a time.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+            <p><code>&lt;div&gt;</code> groups a larger area without giving it a special meaning. <code>&lt;span&gt;</code> groups part of a line. Classes let CSS target those groups. CSS can change display behaviour, but the element's HTML content rules still apply. For example, a paragraph cannot contain another paragraph.</p>
+        </section>
+        <section id="semantics">
+            <h2>2. Choose elements that describe their job</h2>
+            <p>A semantic element tells you what its content represents. Reading <code>&lt;nav&gt;</code> suggests navigation, while reading a generic <code>&lt;div&gt;</code> gives no such clue.</p>
+            <div class="table-wrap"><table><caption>Common semantic elements</caption><thead><tr><th scope="col">Element</th><th scope="col">Purpose</th></tr></thead><tbody>
+                <tr><td><code>&lt;header&gt;</code></td><td>Introductory content for a page or section.</td></tr>
+                <tr><td><code>&lt;nav&gt;</code></td><td>A major group of navigation links.</td></tr>
+                <tr><td><code>&lt;main&gt;</code></td><td>The page's dominant content.</td></tr>
+                <tr><td><code>&lt;section&gt;</code></td><td>A related group of content, usually with a heading.</td></tr>
+                <tr><td><code>&lt;article&gt;</code></td><td>A self-contained item, such as an article or news story.</td></tr>
+                <tr><td><code>&lt;aside&gt;</code></td><td>Related supporting content, such as a side note.</td></tr>
+                <tr><td><code>&lt;footer&gt;</code></td><td>Closing information about a page or section.</td></tr>
+            </tbody></table></div>
+            <pre><code>&lt;header&gt;
+    &lt;h1&gt;Student Learning Guide&lt;/h1&gt;
+&lt;/header&gt;
+&lt;nav&gt;
+    &lt;a href="index.html"&gt;Home&lt;/a&gt;
+    &lt;a href="lecture3.html"&gt;HTML&lt;/a&gt;
+&lt;/nav&gt;
+&lt;main&gt;
+    &lt;section&gt;
+        &lt;h2&gt;Getting started&lt;/h2&gt;
+        &lt;p&gt;Begin with a clear document structure.&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;
+    &lt;p&gt;Keep practising with small examples.&lt;/p&gt;
+&lt;/footer&gt;</code></pre>
+            <p>The tags organise meaning. CSS is still responsible for their colours, borders and spacing. Good semantics help people using assistive technology, help software interpret a page, and make the source easier to maintain.</p>
+        </section>
+        <section id="forms">
+            <h2>3. How a form sends information</h2>
+            <p><code>&lt;form&gt;</code> groups controls for collecting input. Its <code>action</code> identifies the receiving URL, and its <code>method</code> defines how the browser submits the data.</p>
+            <pre><code>&lt;form action="/register" method="post"&gt;
+    &lt;label for="student-name"&gt;Name&lt;/label&gt;
+    &lt;input type="text" id="student-name" name="student_name" required&gt;
+    &lt;button type="submit"&gt;Register&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+            <p>The example needs a server endpoint at <code>/register</code> to process a registration. HTML creates the controls, but it does not supply that server behaviour.</p>
+            <ul>
+                <li><strong>GET:</strong> puts submitted values into the URL query. It is commonly used for retrieving information, such as a search.</li>
+                <li><strong>POST:</strong> puts submitted values in the request body. It is commonly used when submitting information for processing.</li>
+            </ul>
+            <div class="note"><p><strong>POST does not encrypt data.</strong> HTTPS protects communication in transit. A password input hides characters on screen, but that also does not encrypt a submission.</p></div>
+            <h3>Understand the attributes</h3>
+            <dl>
+                <dt><code>id</code> and <code>for</code></dt><dd>An input's unique <code>id</code> matches a label's <code>for</code>. Clicking the label then focuses or activates its control.</dd>
+                <dt><code>name</code></dt><dd>Identifies the submitted field. The server receives named values such as <code>student_name=Ali</code>. An <code>id</code> alone does not give a field a submission name.</dd>
+                <dt><code>value</code></dt><dd>Can supply an initial text value or identify an option, such as the value of a radio button.</dd>
+                <dt><code>placeholder</code></dt><dd>Shows a short example before the visitor types. It is a hint, so it should not replace the visible label.</dd>
+            </dl>
+        </section>
+        <section id="controls">
+            <h2>4. Choose a control for the information</h2>
+            <div class="table-wrap"><table><caption>Common input types</caption><thead><tr><th scope="col">Type</th><th scope="col">Use</th></tr></thead><tbody>
+                <tr><td><code>text</code></td><td>A short line of text, such as a name.</td></tr>
+                <tr><td><code>email</code></td><td>An email address, with basic browser format checking.</td></tr>
+                <tr><td><code>password</code></td><td>Text whose characters are visually masked.</td></tr>
+                <tr><td><code>number</code></td><td>A numeric value, such as marks.</td></tr>
+                <tr><td><code>date</code></td><td>A date, often with a browser date picker.</td></tr>
+                <tr><td><code>checkbox</code></td><td>An independent on/off choice. Multiple boxes can be selected.</td></tr>
+                <tr><td><code>radio</code></td><td>One choice from a group whose controls share a name.</td></tr>
+                <tr><td><code>file</code></td><td>Selecting a local file for a suitable upload form.</td></tr>
+            </tbody></table></div>
+            <p><code>&lt;select&gt;</code> provides a dropdown whose choices use <code>&lt;option&gt;</code>. <code>&lt;textarea&gt;</code> provides several lines of input. Write its initial text between its opening and closing tags. A <code>&lt;button&gt;</code> can submit or reset a form, depending on its type.</p>
+            <pre><code>&lt;label for="topic"&gt;Topic&lt;/label&gt;
+&lt;select id="topic" name="topic"&gt;
+    &lt;option value="html"&gt;HTML&lt;/option&gt;
+    &lt;option value="css"&gt;CSS&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;label for="message"&gt;Question&lt;/label&gt;
+&lt;textarea id="message" name="message" rows="3"&gt;&lt;/textarea&gt;</code></pre>
+            <h3>Group related choices</h3>
+            <p><code>&lt;fieldset&gt;</code> groups controls. <code>&lt;legend&gt;</code> names the group. Giving radio buttons the same <code>name</code> means only one of them can be selected at a time. Their values distinguish the choices.</p>
+            <pre><code>&lt;fieldset&gt;
+    &lt;legend&gt;Preferred topic&lt;/legend&gt;
+    &lt;label&gt;&lt;input type="radio" name="topic" value="html"&gt; HTML&lt;/label&gt;
+    &lt;label&gt;&lt;input type="radio" name="topic" value="css"&gt; CSS&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre>
+        </section>
+        <section id="validation">
+            <h2>5. Let the browser check simple rules</h2>
+            <p>HTML can catch common input mistakes before a form is submitted. <code>required</code> prevents a field from being empty. <code>min</code> and <code>max</code> limit a number or date. <code>pattern</code> checks a text value against a format.</p>
+            <pre><code>&lt;label for="practice-reg"&gt;Registration number&lt;/label&gt;
+&lt;input type="text" id="practice-reg" name="reg"
+       placeholder="FA24-BSE-084"
+       pattern="FA[0-9]{2}-BSE-[0-9]{3}" required&gt;
+
+&lt;label for="practice-marks"&gt;Marks, from 0 to 100&lt;/label&gt;
+&lt;input type="number" id="practice-marks" name="marks"
+       min="0" max="100" required&gt;</code></pre>
+            <p>The pattern means the letters <code>FA</code>, two digits, <code>-BSE-</code>, then three digits. This example accepts <code>FA24-BSE-084</code>, but rejects <code>FA24-BSE-84</code>. It illustrates one format, rather than every possible registration number.</p>
+            <h3>Try the form</h3>
+            <p>Use sample values. Leave a required field empty or enter marks above 100, then press <strong>Check and continue</strong>. The browser should ask you to correct it. When the values satisfy the rules, the form opens a short explanation page.</p>
+            <div class="output">
+                <!-- This demonstration uses GET and a static destination page. -->
+                <form action="form-practice.html" method="get">
+                    <label for="reg">Registration number (example: FA24-BSE-084)</label>
+                    <input type="text" id="reg" name="reg" placeholder="FA24-BSE-084" pattern="FA[0-9]{2}-BSE-[0-9]{3}" title="Use FA, two digits, -BSE-, then three digits." required>
+                    <label for="marks">Marks, from 0 to 100</label>
+                    <input type="number" id="marks" name="marks" min="0" max="100" required>
+                    <label for="topic">Topic to practise</label>
+                    <select id="topic" name="topic"><option value="html">HTML</option><option value="css">CSS</option></select>
+                    <fieldset><legend>Have you tried the examples?</legend><label><input type="radio" name="tried" value="yes" required> Yes</label><label><input type="radio" name="tried" value="not-yet"> Not yet</label></fieldset>
+                    <label for="question">Practice question (optional)</label>
+                    <textarea id="question" name="question" rows="3" placeholder="Which tag creates a paragraph?"></textarea>
+                    <p><button type="submit">Check and continue</button><button type="reset">Reset</button></p>
+                </form>
+            </div>
+            <p>This demonstration uses <code>method="get"</code>, so named values appear in the destination URL. It does not create an account or save a record in a database. In a real application, the server must validate submitted values again because browser checks can be bypassed.</p>
+        </section>
+        <section id="accessibility">
+            <h2>6. Make the page easier for everyone to use</h2>
+            <ul><li>Connect each form label to its control and show the expected format in visible text.</li><li>Use headings in a sensible order and semantic elements for page regions.</li><li>Give informative images useful alternative text.</li><li>Keep keyboard focus visible so people can see which link or control is selected.</li><li>Use readable text colours and describe errors clearly.</li></ul>
+            <p>These choices help people using keyboards or screen readers, and they usually make the page clearer for everyone else too.</p>
+        </section>
+        <div class="practice"><p><strong>Try it yourself</strong></p><ol><li>Build a page with a header, navigation, main content and footer.</li><li>Create a labelled email input using <code>type="email"</code> and <code>required</code>.</li><li>Explain why radio buttons share a name but use different values.</li><li>Try an invalid registration number and explain which part of the pattern it breaks.</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="lecture3.html">&larr; Previous lecture</a><a href="index.html">Home</a><a href="lecture5.html">Next: CSS styling &rarr;</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 4</p></footer>
+</body>
+</html>

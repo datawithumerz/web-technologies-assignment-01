@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 6: The CSS Box Model and Display | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top"><div class="container"><a class="site-title" href="index.html">Web Technologies</a><p>Understand the space around every element</p></div></header>
+    <nav class="top-nav" aria-label="Lecture navigation"><div class="container">
+        <a href="index.html">Home</a><a href="lecture1.html">1</a><a href="lecture2.html">2</a><a href="lecture3.html">3</a><a href="lecture4.html">4</a><a href="lecture5.html">5</a><a class="current" href="lecture6.html" aria-current="page">6</a>
+    </div></nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 6</p>
+        <h1>The CSS Box Model and Display</h1>
+        <p class="intro">Every element occupies space. Once you understand its content, padding, border and margin, spacing problems become easier to explain and fix.</p>
+        <div class="contents"><p><strong>On this page</strong></p><ul><li><a href="#box-model">The four parts of a box</a></li><li><a href="#box-sizing">Calculating size</a></li><li><a href="#margins">Shorthand and margin collapsing</a></li><li><a href="#dimensions">Dimensions and overflow</a></li><li><a href="#display">Display values</a></li><li><a href="#finishing">Borders, shadows and consistent spacing</a></li></ul></div>
+        <section id="box-model">
+            <h2>1. Content, padding, border and margin</h2>
+            <div class="table-wrap"><table><caption>The box model, from inside to outside</caption><thead><tr><th scope="col">Part</th><th scope="col">What it means</th><th scope="col">Example</th></tr></thead><tbody>
+                <tr><td>Content</td><td>The area containing text, an image or child elements.</td><td>The words inside a notice.</td></tr>
+                <tr><td>Padding</td><td>Space between the content and the border.</td><td>Room around the words inside the notice.</td></tr>
+                <tr><td>Border</td><td>The boundary around content and padding.</td><td>A green line around the notice.</td></tr>
+                <tr><td>Margin</td><td>Space outside the border.</td><td>The gap between the notice and the next element.</td></tr>
+            </tbody></table></div>
+            <p>If text feels pressed against an edge, increase <strong>padding</strong>. If two separate boxes feel too close, increase their <strong>margin</strong>. The element's background extends through its padding, while its margin remains outside that background.</p>
+            <pre><code>&lt;div class="demo-box"&gt;
+    Padding gives this text room inside the border.
+&lt;/div&gt;</code></pre>
+            <pre><code>.demo-box {
+    box-sizing: border-box;
+    width: 250px;
+    max-width: 100%;
+    padding: 20px;
+    border: 5px solid #244b43;
+    margin: 20px 0;
+    background-color: #edf2e7;
+}</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><div class="demo-box">Padding gives this text room inside the border.</div></div>
+            <p>The green border encloses the text and padding. The top and bottom margins create space outside it. <code>max-width: 100%</code> lets the example fit when its available space is narrower than 250 pixels.</p>
+        </section>
+        <section id="box-sizing">
+            <h2>2. What does width actually include?</h2>
+            <p>The answer depends on <code>box-sizing</code>. With <code>content-box</code>, the declared width covers only the content. Padding and borders add to the visible box width.</p>
+            <pre><code>.box {
+    box-sizing: content-box;
+    width: 250px;
+    padding: 20px;
+    border: 5px solid black;
+}</code></pre>
+            <p>The border-to-border width is <strong>250 + 20 + 20 + 5 + 5 = 300px</strong>. Margins are outside that 300-pixel box. A 30-pixel margin on both sides would take another 60 pixels of horizontal space.</p>
+            <p>With <code>border-box</code>, the declared width includes the content, padding and borders. Using the same values, the outside box stays 250 pixels wide and the content area becomes 200 pixels.</p>
+            <pre><code>.box {
+    box-sizing: border-box;
+    width: 250px;
+    padding: 20px;
+    border: 5px solid black;
+}</code></pre>
+            <div class="table-wrap"><table><caption>Same declarations, different sizing rules</caption><thead><tr><th scope="col">Sizing rule</th><th scope="col">Content width</th><th scope="col">Width including padding and border</th></tr></thead><tbody>
+                <tr><td><code>content-box</code></td><td>250px</td><td>300px</td></tr>
+                <tr><td><code>border-box</code></td><td>200px</td><td>250px</td></tr>
+            </tbody></table></div>
+            <p>A common way to make dimensions easier to manage is to apply this rule at the start of a stylesheet:</p>
+            <pre><code>* {
+    box-sizing: border-box;
+}</code></pre>
+            <p>This selects every element. It changes how declared widths and heights are calculated; it does not remove padding or borders.</p>
+        </section>
+        <section id="margins">
+            <h2>3. Shorthand and margin collapsing</h2>
+            <p>Padding and margin accept one, two, three or four values. For four values, read them clockwise: top, right, bottom, left.</p>
+            <pre><code>padding: 16px;                 /* All sides */
+padding: 12px 20px;            /* Top/bottom, left/right */
+padding: 10px 20px 30px;       /* Top, left/right, bottom */
+padding: 10px 20px 30px 40px;  /* Top, right, bottom, left */</code></pre>
+            <p>The same pattern applies to <code>margin</code>. You can also set one side directly, such as <code>margin-bottom: 24px;</code>.</p>
+            <h3>Why do two margins sometimes make one gap?</h3>
+            <p>Some vertical margins between ordinary block elements <strong>collapse</strong>. When two positive adjacent margins collapse, the resulting gap is the larger value instead of their sum.</p>
+            <pre><code>.first {
+    margin-bottom: 30px;
+}
+
+.second {
+    margin-top: 20px;
+}</code></pre>
+            <p>If these are adjacent blocks in normal flow and their margins collapse, the gap is 30 pixels, rather than 50. Left and right margins do not collapse this way, and padding does not collapse.</p>
+            <p>A parent's top margin and its first child's top margin can also interact. Adding top padding or a top border to the parent separates them. This explains why a child's margin may seem to move a larger section instead of creating space inside it.</p>
+        </section>
+        <section id="dimensions">
+            <h2>4. Flexible dimensions and overflow</h2>
+            <p>A fixed width uses a value such as <code>400px</code>. A percentage width responds to the containing block. Minimum and maximum properties place limits on how small or large a box can become.</p>
+            <pre><code>.container {
+    width: 92%;
+    max-width: 920px;
+    margin: 0 auto;
+}</code></pre>
+            <p>This container uses most of the available width on a small screen and stops growing at 920 pixels. The automatic left and right margins centre it. <code>min-width</code>, <code>min-height</code> and <code>max-height</code> provide other limits when they are needed.</p>
+            <p>A fixed height can cause trouble when text grows or wraps onto more lines. Let long reading sections grow naturally. When a deliberately limited box needs to contain extra content, use <code>overflow</code>.</p>
+            <div class="table-wrap"><table><caption>Overflow values</caption><thead><tr><th scope="col">Value</th><th scope="col">Effect</th></tr></thead><tbody>
+                <tr><td><code>visible</code></td><td>Extra content can extend beyond the box.</td></tr>
+                <tr><td><code>hidden</code></td><td>Extra content is clipped without normal scrolling controls.</td></tr>
+                <tr><td><code>scroll</code></td><td>Creates a scrolling box, even when content fits. Scrollbar appearance depends on the system.</td></tr>
+                <tr><td><code>auto</code></td><td>Provides scrolling when content overflows.</td></tr>
+            </tbody></table></div>
+            <pre><code>.demo-scroll {
+    height: 120px;
+    padding: 12px;
+    overflow: auto;
+    border: 1px solid #81907d;
+}</code></pre>
+            <p class="example-label">Browser result: scroll inside this box</p>
+            <div class="demo-scroll" tabindex="0" role="region" aria-label="Scrollable overflow example">
+                <p>This box has a fixed height of 120 pixels. Its content continues beyond the available vertical space.</p>
+                <p>Because it uses overflow: auto, you can scroll to read the remaining paragraphs. The surrounding page does not need to stretch the box.</p>
+                <p>This can be useful for a small preview, but normal lesson text is usually easier to read without a separate scroll area.</p>
+                <p>You have reached the end of the example.</p>
+            </div>
+        </section>
+        <section id="display">
+            <h2>5. How display changes layout</h2>
+            <p>The <code>display</code> property determines how an element participates in layout. Changing it affects the box's behaviour without changing the element's meaning in HTML.</p>
+            <div class="table-wrap"><table><caption>Four useful display values</caption><thead><tr><th scope="col">Value</th><th scope="col">Line behaviour</th><th scope="col">Dimensions and space</th></tr></thead><tbody>
+                <tr><td><code>block</code></td><td>Starts on a new line.</td><td>Can use width and height; normally fills available width.</td></tr>
+                <tr><td><code>inline</code></td><td>Flows within a line.</td><td>For ordinary text elements, width and height do not control the box as they do for blocks.</td></tr>
+                <tr><td><code>inline-block</code></td><td>Flows inline and wraps when needed.</td><td>Accepts width, height, padding and borders.</td></tr>
+                <tr><td><code>none</code></td><td>Does not generate a visible box.</td><td>Takes no layout space.</td></tr>
+            </tbody></table></div>
+            <p>By default, a paragraph commonly behaves as a block and a span behaves inline. An image is a special inline element that can still have dimensions, so the normal text rule is not universal.</p>
+            <h3>Inline-block example</h3>
+            <pre><code>&lt;span class="demo-tag"&gt;HTML&lt;/span&gt;
+&lt;span class="demo-tag"&gt;CSS&lt;/span&gt;
+&lt;span class="demo-tag"&gt;The Web&lt;/span&gt;</code></pre>
+            <pre><code>.demo-tag {
+    display: inline-block;
+    width: 100px;
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid #244b43;
+    text-align: center;
+}</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><span class="demo-tag">HTML</span><span class="demo-tag">CSS</span><span class="demo-tag">The Web</span></div>
+            <p>The boxes remain beside one another when space allows and move onto another line when it does not. This is a simple way to style short navigation links or labels without a complex layout.</p>
+            <h3>Hiding an element</h3>
+            <pre><code>.hidden-note {
+    display: none;
+}</code></pre>
+            <p><code>display: none</code> removes the element's box from the layout. <code>visibility: hidden</code> hides it while generally keeping its layout space. Neither technique removes the content from the HTML source or protects private information.</p>
+        </section>
+        <section id="finishing">
+            <h2>6. Borders, shadows and consistent spacing</h2>
+            <p>A border shorthand contains its width, style and colour. You can style individual sides, round corners with <code>border-radius</code>, or add a subtle shadow.</p>
+            <pre><code>.notice {
+    padding: 16px;
+    margin-bottom: 24px;
+    border: 1px solid #b5c1b0;
+    border-left: 4px solid #244b43;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}</code></pre>
+            <p>In this shadow, the first two values are horizontal and vertical offsets. The third is blur, followed by the colour. A shadow adds a visual effect without changing the layout dimensions of the box.</p>
+            <p>Choose a small set of spacing values, such as 8, 16, 24 and 32 pixels, and reuse them. Consistent spacing makes headings, paragraphs and examples feel connected. You can build a clear page with basic widths, margins, padding and display rules.</p>
+        </section>
+        <div class="practice"><p><strong>Try it yourself</strong></p><ol><li>Make a box 300 pixels wide with 20 pixels of padding and a 2-pixel border. Calculate its outside width using <code>content-box</code>, then check <code>border-box</code>.</li><li>Increase padding and margin separately. Explain which space changes each time.</li><li>Switch the example labels from <code>inline-block</code> to <code>block</code>.</li><li>Narrow the browser window and watch the container and labels adapt.</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="lecture5.html">&larr; Previous lecture</a><a href="index.html">Home</a><a href="previous-lab/index.html">Previous Assignment</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 6</p></footer>
+</body>
+</html>

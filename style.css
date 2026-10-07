@@ -1,0 +1,332 @@
+/* Shared styles for every page. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f3f2ec;
+    color: #28322e;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+/* A percentage width fits small screens; max-width limits long lines. */
+.container {
+    width: 92%;
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+.site-header {
+    padding: 24px 0;
+    background-color: #244b43;
+    color: white;
+    border-bottom: 5px solid #b9c5a6;
+}
+
+.site-header h1 {
+    margin: 0 0 8px;
+    color: white;
+}
+
+.site-header p {
+    margin: 4px 0;
+}
+
+.site-title {
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.site-header a:hover,
+.site-header a:focus {
+    color: white;
+}
+
+.top-nav {
+    padding: 12px 0;
+    border-bottom: 1px solid #d6dbd2;
+    background-color: #e7ece3;
+}
+
+.top-nav a {
+    display: inline-block;
+    margin: 3px 8px 3px 0;
+    padding: 3px 9px;
+}
+
+.top-nav .current {
+    background-color: #244b43;
+    color: white;
+    text-decoration: none;
+}
+
+main.container {
+    margin: 24px auto;
+    padding: 24px;
+    background-color: white;
+    border: 1px solid #d6dbd2;
+}
+
+h1, h2, h3 {
+    color: #244b43;
+    line-height: 1.3;
+}
+
+h1, h2 {
+    font-family: Georgia, serif;
+}
+
+h1 {
+    margin: 6px 0 16px;
+    font-size: 32px;
+}
+
+h2 {
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #d6dbd2;
+    font-size: 24px;
+}
+
+h3 {
+    margin: 22px 0 10px;
+    font-size: 18px;
+}
+
+p {
+    margin: 12px 0;
+}
+
+a {
+    color: #205c50;
+    text-decoration: underline;
+}
+
+a:hover, a:focus {
+    color: #8a3d20;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin: 0 0 14px 22px;
+}
+
+.eyebrow, .example-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #52614f;
+}
+
+.intro {
+    font-size: 18px;
+}
+
+.contents, .note, .practice {
+    margin: 22px 0;
+    padding: 16px 20px;
+    background-color: #f1f4ed;
+    border-left: 4px solid #7a936f;
+}
+
+.contents p, .note p, .practice p {
+    margin-top: 0;
+}
+
+.contents ul, .practice ol {
+    margin-bottom: 0;
+    padding-left: 22px;
+}
+
+/* The wrapper keeps wide tables within a small screen. */
+.table-wrap {
+    overflow: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    margin-bottom: 10px;
+    text-align: left;
+    font-weight: bold;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #c9d2c7;
+    text-align: left;
+    vertical-align: top;
+}
+
+thead th {
+    background-color: #244b43;
+    color: white;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f5ef;
+}
+
+.lecture-number {
+    width: 80px;
+}
+
+.muted {
+    color: #5e675f;
+    font-size: 14px;
+}
+
+/* pre preserves indentation; code identifies code in the document. */
+code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.93em;
+    background-color: #edf0e9;
+    padding: 2px 4px;
+    overflow-wrap: anywhere;
+}
+
+pre {
+    margin: 12px 0 20px;
+    padding: 18px;
+    overflow: auto;
+    border: 1px solid #d2d9cf;
+    background-color: #f5f6f2;
+    line-height: 1.55;
+}
+
+pre code {
+    padding: 0;
+    background-color: transparent;
+    overflow-wrap: normal;
+}
+
+.output {
+    margin: 12px 0 22px;
+    padding: 18px;
+    border: 1px dashed #9aa991;
+}
+
+.output > :first-child {
+    margin-top: 0;
+}
+
+.output > :last-child {
+    margin-bottom: 0;
+}
+
+/* Form practice uses the browser's built-in HTML validation. */
+label {
+    display: block;
+    margin: 12px 0 4px;
+}
+
+input, select, textarea, button {
+    font: inherit;
+}
+
+input[type="text"], input[type="email"], input[type="number"],
+select, textarea {
+    width: 100%;
+    max-width: 420px;
+    padding: 8px;
+    border: 1px solid #81907d;
+    background-color: white;
+}
+
+fieldset {
+    max-width: 460px;
+    margin: 18px 0;
+    padding: 12px 18px;
+    border: 1px solid #b5c1b0;
+}
+
+legend {
+    padding: 0 6px;
+    font-weight: bold;
+}
+
+button {
+    display: inline-block;
+    margin: 14px 8px 0 0;
+    padding: 8px 16px;
+    border: 1px solid #244b43;
+    background-color: #244b43;
+    color: white;
+}
+
+button:hover, button:focus {
+    background-color: #38685b;
+}
+
+button[type="reset"] {
+    background-color: white;
+    color: #244b43;
+}
+
+/* Small examples used in the CSS lessons. */
+.demo-text {
+    color: #205c50;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    text-align: center;
+    background-color: #edf2e7;
+    padding: 16px;
+}
+
+.demo-box {
+    width: 250px;
+    max-width: 100%;
+    padding: 20px;
+    border: 5px solid #244b43;
+    margin: 20px 0;
+    background-color: #edf2e7;
+}
+
+.demo-tag {
+    display: inline-block;
+    width: 100px;
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid #244b43;
+    text-align: center;
+}
+
+.demo-scroll {
+    height: 120px;
+    padding: 12px;
+    overflow: auto;
+    border: 1px solid #81907d;
+}
+
+.page-nav {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid #d6dbd2;
+}
+
+.page-nav a {
+    display: inline-block;
+    margin: 6px 20px 6px 0;
+}
+
+.site-footer {
+    padding: 0 0 26px;
+    color: #596457;
+    font-size: 14px;
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 3: HTML Structure and Content | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top"><div class="container"><a class="site-title" href="index.html">Web Technologies</a><p>Give your content a clear structure</p></div></header>
+    <nav class="top-nav" aria-label="Lecture navigation"><div class="container">
+        <a href="index.html">Home</a><a href="lecture1.html">1</a><a href="lecture2.html">2</a><a class="current" href="lecture3.html" aria-current="page">3</a><a href="lecture4.html">4</a><a href="lecture5.html">5</a><a href="lecture6.html">6</a>
+    </div></nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 3</p>
+        <h1>HTML Structure and Content</h1>
+        <p class="intro">HTML tells the browser what your content means. A heading introduces a topic, a paragraph explains it, and a link connects it to another resource. Choosing the right element gives the page a useful structure.</p>
+        <div class="contents"><p><strong>On this page</strong></p><ul><li><a href="#structure">Document structure and nesting</a></li><li><a href="#text">Headings and text</a></li><li><a href="#links">Links, images and media</a></li><li><a href="#lists">Lists</a></li><li><a href="#tables">Tables</a></li><li><a href="#validation">Checking your HTML</a></li></ul></div>
+        <section id="structure">
+            <h2>1. Start with a complete HTML document</h2>
+            <p><strong>HTML</strong> means HyperText Markup Language. It marks up content using elements. It describes structure rather than performing calculations or running application logic.</p>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Page&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Learning HTML&lt;/h1&gt;
+    &lt;p&gt;This is my first paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <dl>
+                <dt><code>&lt;!DOCTYPE html&gt;</code></dt><dd>Declares an HTML document and helps the browser use standards mode. It is a declaration, not a normal content element.</dd>
+                <dt><code>&lt;html lang="en"&gt;</code></dt><dd>The root element contains the document. The <code>lang</code> attribute identifies English as the page language.</dd>
+                <dt><code>&lt;head&gt;</code></dt><dd>Contains information about the document. The character encoding supports text characters, the viewport setting helps with mobile display, and <code>&lt;title&gt;</code> supplies the browser tab title.</dd>
+                <dt><code>&lt;link&gt;</code></dt><dd>Connects the page to another resource. Here, <code>rel="stylesheet"</code> and <code>href="style.css"</code> connect the external CSS file.</dd>
+                <dt><code>&lt;body&gt;</code></dt><dd>Contains the page content visitors read and use.</dd>
+            </dl>
+            <h3>Tag, element and attribute</h3>
+            <pre><code>&lt;a href="lecture4.html"&gt;Read about forms&lt;/a&gt;</code></pre>
+            <p><code>&lt;a&gt;</code> and <code>&lt;/a&gt;</code> are tags. The complete anchor, including its content, is an <strong>element</strong>. <code>href="lecture4.html"</code> is an <strong>attribute</strong> that gives the link its destination. Attribute values usually belong in quotes.</p>
+            <p>Some elements are <strong>void elements</strong>, such as <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code> and <code>&lt;meta&gt;</code>. They do not wrap content and have no closing tag in HTML.</p>
+            <h3>Nesting and the DOM</h3>
+            <p>Elements can contain other elements. Close them in the reverse order from opening them. The browser represents the document as a tree called the <strong>Document Object Model (DOM)</strong>. In the example below, <code>strong</code> is inside the paragraph.</p>
+            <pre><code>&lt;p&gt;Save your work &lt;strong&gt;before closing the editor.&lt;/strong&gt;&lt;/p&gt;</code></pre>
+            <p>The <code>&lt;strong&gt;</code> element closes before <code>&lt;/p&gt;</code>. Good indentation makes these parent and child relationships easier to follow.</p>
+        </section>
+        <section id="text">
+            <h2>2. Organise and explain with text</h2>
+            <p>Use <code>&lt;h1&gt;</code> for the main page heading. Use <code>&lt;h2&gt;</code> for major sections and <code>&lt;h3&gt;</code> for sections within them. HTML provides headings through <code>&lt;h6&gt;</code>. Choose levels according to the content hierarchy, then use CSS to control their visual size.</p>
+            <pre><code>&lt;h2&gt;Learning HTML&lt;/h2&gt;
+&lt;h3&gt;Why structure matters&lt;/h3&gt;
+&lt;p&gt;A clear structure helps readers find information.&lt;/p&gt;
+&lt;p&gt;Use &lt;strong&gt;important words&lt;/strong&gt; carefully.&lt;/p&gt;</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><h2>Learning HTML</h2><h3>Why structure matters</h3><p>A clear structure helps readers find information.</p><p>Use <strong>important words</strong> carefully.</p></div>
+            <div class="table-wrap"><table><caption>Useful text elements</caption><thead><tr><th scope="col">Element</th><th scope="col">Meaning and use</th></tr></thead><tbody>
+                <tr><td><code>&lt;p&gt;</code></td><td>A paragraph containing a connected piece of text.</td></tr>
+                <tr><td><code>&lt;strong&gt;</code></td><td>Strong importance, often displayed in bold.</td></tr>
+                <tr><td><code>&lt;em&gt;</code></td><td>Stress emphasis, often displayed in italics.</td></tr>
+                <tr><td><code>&lt;mark&gt;</code></td><td>Text highlighted because it is relevant in the current context.</td></tr>
+                <tr><td><code>&lt;del&gt;</code> / <code>&lt;ins&gt;</code></td><td>Content that was deleted or inserted.</td></tr>
+                <tr><td><code>&lt;br&gt;</code></td><td>A line break, useful within an address or poem.</td></tr>
+                <tr><td><code>&lt;hr&gt;</code></td><td>A thematic break between parts of the content.</td></tr>
+                <tr><td><code>&lt;code&gt;</code> / <code>&lt;pre&gt;</code></td><td>Computer code, and text whose spacing and line breaks should be preserved.</td></tr>
+            </tbody></table></div>
+            <p>Use separate paragraphs for separate ideas. Repeated <code>&lt;br&gt;</code> tags are a poor way to create page spacing because spacing belongs in CSS.</p>
+            <div class="note"><p><strong>How do you show a tag as text?</strong> Write <code>&amp;lt;</code> for the less-than sign and <code>&amp;gt;</code> for the greater-than sign. For example, <code>&amp;lt;p&amp;gt;</code> displays as <code>&lt;p&gt;</code>. This keeps an example from becoming a real paragraph element.</p></div>
+        </section>
+        <section id="links">
+            <h2>3. Connect pages and add media</h2>
+            <p>An anchor element, <code>&lt;a&gt;</code>, becomes a hyperlink when it has an <code>href</code>. Use meaningful link text so the destination is clear.</p>
+            <pre><code>&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;
+&lt;a href="lecture4.html"&gt;Learn about HTML forms&lt;/a&gt;
+&lt;a href="#tables"&gt;Jump to tables&lt;/a&gt;</code></pre>
+            <ul><li>An <strong>absolute URL</strong> includes the scheme and host, such as <code>https://example.com</code>.</li><li>A <strong>relative path</strong>, such as <code>lecture4.html</code>, points from the current page's location.</li><li>A <strong>fragment link</strong>, such as <code>#tables</code>, jumps to an element with a matching <code>id="tables"</code>.</li></ul>
+            <p class="example-label">Browser result</p>
+            <div class="output"><a href="lecture4.html">Learn about HTML forms</a><br><a href="#tables">Jump to tables</a></div>
+            <h3>Images</h3>
+            <pre><code>&lt;img src="student.jpg"
+     alt="A student reading a web development book"
+     width="400"&gt;</code></pre>
+            <p><code>src</code> gives the image location. <code>alt</code> provides a text alternative for an informative image. <code>width</code> sets its displayed width in pixels in this example. The file <code>student.jpg</code> must exist at the given path when you try this code.</p>
+            <h3>Audio and video</h3>
+            <pre><code>&lt;audio controls&gt;
+    &lt;source src="lesson.mp3" type="audio/mpeg"&gt;
+    Your browser does not support this audio.
+&lt;/audio&gt;
+
+&lt;video controls width="400"&gt;
+    &lt;source src="lesson.mp4" type="video/mp4"&gt;
+    Your browser does not support this video.
+&lt;/video&gt;</code></pre>
+            <p><code>controls</code> asks the browser to show playback controls. <code>&lt;source&gt;</code> identifies a media file and its format. Add your own media files at these paths before trying the example. Provide transcripts for audio and captions for spoken video so more people can use the content.</p>
+        </section>
+        <section id="lists">
+            <h2>4. Choose the right kind of list</h2>
+            <p>Use <code>&lt;ul&gt;</code> when the items have no required order. Use <code>&lt;ol&gt;</code> when their sequence matters. Each item belongs inside <code>&lt;li&gt;</code>. A nested list should be inside a list item, rather than placed directly between two items.</p>
+            <pre><code>&lt;ul&gt;
+    &lt;li&gt;Text editor&lt;/li&gt;
+    &lt;li&gt;Web browser&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+    &lt;li&gt;Write the HTML.&lt;/li&gt;
+    &lt;li&gt;Save the file.&lt;/li&gt;
+    &lt;li&gt;Open it in a browser.&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><ul><li>Text editor</li><li>Web browser</li></ul><ol><li>Write the HTML.</li><li>Save the file.</li><li>Open it in a browser.</li></ol></div>
+            <p>A <strong>description list</strong> pairs terms and explanations. <code>&lt;dl&gt;</code> holds the list, <code>&lt;dt&gt;</code> marks a term, and <code>&lt;dd&gt;</code> gives its description.</p>
+            <pre><code>&lt;dl&gt;
+    &lt;dt&gt;HTML&lt;/dt&gt;
+    &lt;dd&gt;Describes the structure of a web page.&lt;/dd&gt;
+    &lt;dt&gt;CSS&lt;/dt&gt;
+    &lt;dd&gt;Controls how that page looks.&lt;/dd&gt;
+&lt;/dl&gt;</code></pre>
+        </section>
+        <section id="tables">
+            <h2>5. Use tables for related data</h2>
+            <p>A table is useful when values belong in rows and columns. A marks table connects each student's name with a mark. It is not a general tool for laying out a whole website.</p>
+            <pre><code>&lt;table&gt;
+    &lt;caption&gt;Practice marks&lt;/caption&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th scope="col"&gt;Student&lt;/th&gt;
+            &lt;th scope="col"&gt;Marks&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;Ali&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Sara&lt;/td&gt;&lt;td&gt;91&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+            <p class="example-label">Browser result, with the shared table styles</p>
+            <div class="table-wrap"><table><caption>Practice marks</caption><thead><tr><th scope="col">Student</th><th scope="col">Marks</th></tr></thead><tbody><tr><td>Ali</td><td>85</td></tr><tr><td>Sara</td><td>91</td></tr></tbody></table></div>
+            <p><code>&lt;tr&gt;</code> creates a row. <code>&lt;th&gt;</code> identifies a header cell, and <code>&lt;td&gt;</code> contains a data value. <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> group header and body rows. A <code>&lt;tfoot&gt;</code> can hold totals or a summary. <code>scope="col"</code> identifies a column header.</p>
+            <p><code>colspan</code> lets a cell occupy more than one column. <code>rowspan</code> lets it occupy more than one row. The remaining cells must still form a consistent table structure.</p>
+            <pre><code>&lt;tr&gt;
+    &lt;td colspan="2"&gt;Both students passed.&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+            <p>Use CSS for borders and cell spacing. Older examples may use presentation attributes such as <code>cellpadding</code> or <code>cellspacing</code>, but a shared stylesheet keeps these appearance rules in one place.</p>
+        </section>
+        <section id="validation">
+            <h2>6. Check the document, not just its appearance</h2>
+            <p>A page can look acceptable while containing incorrectly nested elements. An HTML validator can help find missing attributes, invalid nesting and other markup problems. Fix the reported problem, then check the page again.</p>
+            <p>Validation is useful, but it does not guarantee that the writing is clear, the page is accessible or the design works well. Also check headings, link destinations, alternative text and the page at a narrow window size.</p>
+        </section>
+        <div class="practice"><p><strong>Try it yourself</strong></p><ol><li>Create a page with a main heading, two paragraphs and an ordered list.</li><li>Add a link to another page and a link to a section on the same page.</li><li>Add a two-column table of subjects and credit hours.</li><li>Explain the difference between <code>&lt;title&gt;</code> and <code>&lt;h1&gt;</code>.</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="lecture2.html">&larr; Previous lecture</a><a href="index.html">Home</a><a href="lecture4.html">Next: HTML5 and forms &rarr;</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 3</p></footer>
+</body>
+</html>

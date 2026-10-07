@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 5: CSS Basics, Selectors and Styling | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top"><div class="container"><a class="site-title" href="index.html">Web Technologies</a><p>Style content with clear, reusable rules</p></div></header>
+    <nav class="top-nav" aria-label="Lecture navigation"><div class="container">
+        <a href="index.html">Home</a><a href="lecture1.html">1</a><a href="lecture2.html">2</a><a href="lecture3.html">3</a><a href="lecture4.html">4</a><a class="current" href="lecture5.html" aria-current="page">5</a><a href="lecture6.html">6</a>
+    </div></nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 5</p>
+        <h1>CSS Basics, Selectors and Styling</h1>
+        <p class="intro">CSS controls the appearance of HTML. A rule selects some elements and describes how they should look. Learning to select the right elements is just as important as learning the properties.</p>
+        <div class="contents"><p><strong>On this page</strong></p><ul><li><a href="#rules">CSS syntax and stylesheets</a></li><li><a href="#selectors">Selectors and relationships</a></li><li><a href="#pseudo">Pseudo-classes and pseudo-elements</a></li><li><a href="#cascade">Cascade, specificity and inheritance</a></li><li><a href="#appearance">Colour, fonts, text and backgrounds</a></li></ul></div>
+        <section id="rules">
+            <h2>1. Read a CSS rule</h2>
+            <p><strong>CSS</strong> means Cascading Style Sheets. It separates presentation from the HTML content, making the same design easier to apply across several pages.</p>
+            <pre><code>p {
+    color: darkgreen;
+    font-size: 18px;
+}</code></pre>
+            <p><code>p</code> is the <strong>selector</strong>. It chooses paragraph elements. Inside the braces are declarations. Each declaration has a <strong>property</strong>, a colon, a <strong>value</strong> and a semicolon. Here, <code>color</code> is a property and <code>darkgreen</code> is its value.</p>
+            <h3>Three places to write CSS</h3>
+            <div class="table-wrap"><table><caption>Ways to attach CSS</caption><thead><tr><th scope="col">Type</th><th scope="col">Location</th><th scope="col">Scope</th></tr></thead><tbody>
+                <tr><td>Inline</td><td>An element's <code>style</code> attribute</td><td>That element</td></tr>
+                <tr><td>Internal</td><td>A <code>&lt;style&gt;</code> element in the document head</td><td>The current document</td></tr>
+                <tr><td>External</td><td>A separate <code>.css</code> file linked from the head</td><td>Every document that links it</td></tr>
+            </tbody></table></div>
+            <p>Here are the first two forms as short syntax examples:</p>
+            <pre><code>&lt;!-- Inline CSS --&gt;
+&lt;p style="color: green;"&gt;A green paragraph.&lt;/p&gt;
+
+&lt;!-- Internal CSS, placed inside head --&gt;
+&lt;style&gt;
+    p {
+        color: green;
+    }
+&lt;/style&gt;</code></pre>
+            <p>For several related pages, an external file is easier to maintain. Put the declarations in <code>style.css</code> without any <code>&lt;style&gt;</code> tags, then add this line inside each page's <code>&lt;head&gt;</code>:</p>
+            <pre><code>&lt;link rel="stylesheet" href="style.css"&gt;</code></pre>
+            <p>Changing one shared rule can update every linked page. If the design does not appear, first check the filename and path in <code>href</code>.</p>
+        </section>
+        <section id="selectors">
+            <h2>2. Select the elements you want</h2>
+            <div class="table-wrap"><table><caption>Basic CSS selectors</caption><thead><tr><th scope="col">Selector</th><th scope="col">Example</th><th scope="col">What it selects</th></tr></thead><tbody>
+                <tr><td>Element</td><td><code>p</code></td><td>All paragraphs</td></tr>
+                <tr><td>Class</td><td><code>.note</code></td><td>Elements with <code>class="note"</code></td></tr>
+                <tr><td>ID</td><td><code>#intro</code></td><td>The element with <code>id="intro"</code></td></tr>
+                <tr><td>Attribute</td><td><code>input[type="email"]</code></td><td>Email inputs</td></tr>
+                <tr><td>Grouping</td><td><code>h1, h2</code></td><td>All matching h1 and h2 elements</td></tr>
+                <tr><td>Universal</td><td><code>*</code></td><td>Every element</td></tr>
+            </tbody></table></div>
+            <p>A <strong>class</strong> is reusable. Several notes can share <code>class="note"</code>. An <strong>ID</strong> should identify one element within the page. The dot and hash belong in CSS selectors, not in the HTML attribute values.</p>
+            <pre><code>&lt;p class="note"&gt;Save the HTML file before refreshing.&lt;/p&gt;
+&lt;p id="intro"&gt;Welcome to CSS.&lt;/p&gt;</code></pre>
+            <pre><code>.note {
+    background-color: #f1f4ed;
+}
+
+#intro {
+    font-weight: bold;
+}</code></pre>
+            <h3>Select by relationship</h3>
+            <p>A <strong>combinator</strong> describes how elements relate to one another. These selectors help target an area without adding a separate class to every child.</p>
+            <div class="table-wrap"><table><caption>Relationship selectors</caption><thead><tr><th scope="col">Example</th><th scope="col">Meaning</th></tr></thead><tbody>
+                <tr><td><code>.lesson p</code></td><td>All paragraphs anywhere inside an element with class lesson.</td></tr>
+                <tr><td><code>.lesson &gt; p</code></td><td>Only paragraphs that are direct children of that element.</td></tr>
+                <tr><td><code>h2 + p</code></td><td>A paragraph immediately following an h2 with the same parent.</td></tr>
+                <tr><td><code>h2 ~ p</code></td><td>All later paragraph siblings of an h2 with the same parent.</td></tr>
+            </tbody></table></div>
+            <pre><code>&lt;div class="lesson"&gt;
+    &lt;p&gt;Direct child paragraph.&lt;/p&gt;
+    &lt;section&gt;
+        &lt;h2&gt;More information&lt;/h2&gt;
+        &lt;p&gt;Nested paragraph.&lt;/p&gt;
+    &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+            <p><code>.lesson p</code> matches both paragraphs. <code>.lesson &gt; p</code> matches only the first one. The difference is the space versus the greater-than sign.</p>
+        </section>
+        <section id="pseudo">
+            <h2>3. Style a state or a part</h2>
+            <p>A <strong>pseudo-class</strong> selects an element according to its state or position. It normally uses one colon. For example, <code>:hover</code> matches when the pointer is over an element, and <code>:focus</code> matches the currently focused element.</p>
+            <pre><code>a:hover {
+    color: brown;
+}
+
+a:focus {
+    background-color: #fff2cc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f3f5ef;
+}</code></pre>
+            <p>The last rule shades alternating body rows in a table. Other useful pseudo-classes include <code>:first-child</code>, <code>:last-child</code>, <code>:active</code>, <code>:visited</code> and <code>:disabled</code>.</p>
+            <p>A <strong>pseudo-element</strong> targets a part of an element, or creates generated content. It uses two colons. For example:</p>
+            <pre><code>.opening::first-letter {
+    font-size: 28px;
+    color: darkgreen;
+}
+
+.tip::before {
+    content: "Tip: ";
+    font-weight: bold;
+}</code></pre>
+            <p><code>::first-letter</code> styles the first letter. <code>::before</code> inserts generated content before an element's normal content. Other examples include <code>::after</code>, <code>::first-line</code> and <code>::selection</code>. Keep essential instructions in the HTML so the content remains clear without the stylesheet.</p>
+        </section>
+        <section id="cascade">
+            <h2>4. When more than one rule matches</h2>
+            <p>The <strong>cascade</strong> is how CSS resolves competing declarations. For ordinary rules in one author stylesheet, selector specificity and source order explain many everyday conflicts. Origin and importance also matter, so source order alone does not always decide the result.</p>
+            <h3>Specificity</h3>
+            <pre><code>&lt;p id="welcome" class="message"&gt;Hello CSS&lt;/p&gt;</code></pre>
+            <pre><code>p {
+    color: green;
+}
+
+.message {
+    color: blue;
+}
+
+#welcome {
+    color: red;
+}</code></pre>
+            <p>All three rules select the paragraph, but the ID selector is more specific. Under these conditions, the paragraph will be red. A class selector is more specific than an element selector.</p>
+            <div class="table-wrap"><table><caption>Specificity examples: IDs, classes, elements</caption><thead><tr><th scope="col">Selector</th><th scope="col">Specificity</th></tr></thead><tbody>
+                <tr><td><code>#welcome</code></td><td>1-0-0</td></tr>
+                <tr><td><code>.message</code></td><td>0-1-0</td></tr>
+                <tr><td><code>input[type="text"]</code></td><td>0-1-1</td></tr>
+                <tr><td><code>p</code></td><td>0-0-1</td></tr>
+                <tr><td><code>*</code></td><td>0-0-0</td></tr>
+            </tbody></table></div>
+            <p>Compare these parts from left to right, rather than adding them into one score. Classes, attributes and pseudo-classes contribute to the middle part. Elements and pseudo-elements contribute to the last part. Ordinary inline declarations take precedence over ordinary author stylesheet rules for that element.</p>
+            <h3>Source order</h3>
+            <pre><code>p { color: blue; }
+p { color: green; }</code></pre>
+            <p>Both selectors have equal specificity and the other conditions are equal, so the later declaration wins. The paragraphs become green.</p>
+            <h3>Inheritance</h3>
+            <p>Some properties pass from parents to children. If <code>body</code> sets a font, its paragraphs usually inherit it unless another rule sets their font. Properties such as margins, padding and borders do not normally inherit.</p>
+            <pre><code>body {
+    color: #28322e;
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+}</code></pre>
+            <p><code>inherit</code> explicitly uses the parent's value. <code>initial</code> uses a property's initial value. <code>unset</code> acts like inherit for naturally inherited properties and like initial for the others.</p>
+            <div class="note"><p><strong>If a style does not work:</strong> check that the stylesheet loads, the selector matches, the declaration is valid, and another rule is not winning. Changing random properties makes the problem harder to understand.</p></div>
+        </section>
+        <section id="appearance">
+            <h2>5. Colours, fonts and readable text</h2>
+            <p><code>color</code> controls text colour. <code>background-color</code> fills the background. You can express a colour by name, hexadecimal notation, RGB or RGBA.</p>
+            <pre><code>/* Different ways to describe red */
+color: red;
+color: #ff0000;
+color: rgb(255, 0, 0);
+
+/* Red with 50% opacity */
+color: rgba(255, 0, 0, 0.5);</code></pre>
+            <p><code>font-family</code> sets a typeface and its fallbacks. A serif font has small finishing strokes, a sans-serif font has simpler letter endings, and a monospace font gives characters equal widths. Monospace is useful for code.</p>
+            <div class="table-wrap"><table><caption>Properties for readable text</caption><thead><tr><th scope="col">Property</th><th scope="col">Example and effect</th></tr></thead><tbody>
+                <tr><td><code>font-family</code></td><td><code>Arial, sans-serif</code> uses a fallback if Arial is unavailable.</td></tr>
+                <tr><td><code>font-size</code></td><td><code>18px</code> sets text size.</td></tr>
+                <tr><td><code>font-weight</code></td><td><code>bold</code> changes the weight.</td></tr>
+                <tr><td><code>font-style</code></td><td><code>italic</code> changes the slant.</td></tr>
+                <tr><td><code>text-align</code></td><td><code>center</code> centres inline content within its container.</td></tr>
+                <tr><td><code>text-decoration</code></td><td><code>underline</code> adds an underline.</td></tr>
+                <tr><td><code>text-transform</code></td><td><code>uppercase</code> changes how letters display.</td></tr>
+                <tr><td><code>line-height</code></td><td><code>1.7</code> sets line height relative to the font size.</td></tr>
+                <tr><td><code>letter-spacing</code></td><td><code>1px</code> adds space between characters.</td></tr>
+            </tbody></table></div>
+            <h3>A small styled example</h3>
+            <pre><code>&lt;p class="demo-text"&gt;Clear text makes learning easier.&lt;/p&gt;</code></pre>
+            <pre><code>.demo-text {
+    color: #205c50;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    text-align: center;
+    background-color: #edf2e7;
+    padding: 16px;
+}</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><p class="demo-text">Clear text makes learning easier.</p></div>
+            <h3>Background images</h3>
+            <p>A background image appears behind the content. A fallback colour keeps the area readable if the image cannot load. Use an image file that exists at the given path.</p>
+            <pre><code>.banner {
+    background-color: #e7ece3;
+    background-image: url("paper.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}</code></pre>
+            <p><code>no-repeat</code> stops tiling, <code>center</code> centres the image, and <code>cover</code> scales it to cover the box, possibly cropping some edges. A background is decoration; use an HTML image with alternative text when the picture itself carries important information.</p>
+        </section>
+        <div class="practice"><p><strong>Try it yourself</strong></p><ol><li>Link two HTML pages to the same stylesheet and change their heading colour with one rule.</li><li>Give two paragraphs the same class and style them together.</li><li>Predict the winning colour in the specificity example, then remove the ID rule and predict it again.</li><li>Add a hover style to a link and keep a visible focus style for keyboard users.</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="lecture4.html">&larr; Previous lecture</a><a href="index.html">Home</a><a href="lecture6.html">Next: The box model &rarr;</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 5</p></footer>
+</body>
+</html>

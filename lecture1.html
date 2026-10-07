@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture 1: Introduction to the Web | Web Technologies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header" id="top">
+        <div class="container">
+            <a class="site-title" href="index.html">Web Technologies</a>
+            <p>The foundations of a web page</p>
+        </div>
+    </header>
+    <nav class="top-nav" aria-label="Lecture navigation">
+        <div class="container">
+        <a href="index.html">Home</a>
+        <a class="current" href="lecture1.html" aria-current="page">1</a>
+        <a href="lecture2.html">2</a>
+        <a href="lecture3.html">3</a>
+        <a href="lecture4.html">4</a>
+        <a href="lecture5.html">5</a>
+        <a href="lecture6.html">6</a>
+        </div>
+    </nav>
+    <main class="container">
+        <p class="eyebrow">LECTURE 1</p>
+        <h1>Introduction to the Web</h1>
+        <p class="intro">When you open a website, your browser asks another computer for information. Understanding this exchange makes terms such as server, hosting and HTTP much easier to remember.</p>
+        <div class="contents">
+            <p><strong>On this page</strong></p>
+            <ul>
+                <li><a href="#internet">Internet and the Web</a></li>
+                <li><a href="#tools">Tools and web platforms</a></li>
+                <li><a href="#request">How a page reaches you</a></li>
+                <li><a href="#addresses">URLs, URIs and DNS</a></li>
+                <li><a href="#http">HTTP requests and responses</a></li>
+            </ul>
+        </div>
+        <section id="internet">
+            <h2>1. Internet and the World Wide Web</h2>
+            <p>The <strong>Internet</strong> is the worldwide network that connects computers and other devices. It carries many kinds of communication. The <strong>World Wide Web</strong> is a system of linked pages and resources that uses this network.</p>
+            <p>Think of the Internet as a road system. The Web is one service that uses those roads. Email can also use the Internet without being a web page, although a webmail service lets you read email through a browser.</p>
+            <dl>
+                <dt>Web page</dt>
+                <dd>A document a browser can display. An HTML file can describe its headings, paragraphs, links and other content.</dd>
+                <dt>Website</dt>
+                <dd>A collection of related pages and resources. A university website may contain separate pages for departments, admissions and contact details.</dd>
+                <dt>Web browser</dt>
+                <dd>Software that requests and displays web resources. It reads HTML and CSS to build the page you see.</dd>
+                <dt>Web server</dt>
+                <dd>Software, and the computer running it, that receives requests and sends resources or generated responses.</dd>
+            </dl>
+        </section>
+        <section id="tools">
+            <h2>2. What do you need to make a website?</h2>
+            <p>You can begin with a text editor and a browser. Write a page in the editor, save it with the <code>.html</code> extension, and open it in the browser. Editing the source changes what the browser can display after a refresh.</p>
+            <div class="table-wrap"><table><caption>From writing a page to publishing it</caption><thead><tr><th scope="col">Tool or service</th><th scope="col">What it does</th></tr></thead><tbody>
+                <tr><td>Text editor</td><td>Lets you write the HTML and CSS yourself.</td></tr>
+                <tr><td>Web authoring tool or IDE</td><td>Can provide suggestions, error hints and other development tools. A WYSIWYG editor shows a visual result while you edit.</td></tr>
+                <tr><td>Upload or publishing tool</td><td>Transfers your files to a server. FTP is one file-transfer method discussed in web publishing.</td></tr>
+                <tr><td>Hosting service</td><td>Provides the place and service that make your website available over the Web.</td></tr>
+                <tr><td>Browser</td><td>Retrieves the page and displays the result for the visitor.</td></tr>
+            </tbody></table></div>
+            <p>A file saved on your laptop is a <strong>local file</strong>. Other people cannot open it over the public Web simply because you can see it. Publishing places the site on a server where visitors can reach it through a web address.</p>
+            <h3>What is a web platform?</h3>
+            <p>A web platform provides tools or an environment for creating and using web services. It can include a user interface, servers, databases, content management and security features. APIs allow different software systems to exchange information. A shopping platform, for example, connects product pages with stock information and payment services.</p>
+        </section>
+        <section id="request">
+            <h2>3. The request and response cycle</h2>
+            <p>The browser acts as a <strong>client</strong>. It requests a resource, and the server returns a response. For a typical hosted page, the process is:</p>
+            <ol>
+                <li>You enter a URL or follow a link.</li>
+                <li>The browser obtains the server's address, often using DNS.</li>
+                <li>It connects to the server and sends an HTTP request.</li>
+                <li>The server returns a response, such as an HTML document.</li>
+                <li>The browser reads the HTML and requests linked resources, such as a stylesheet or images.</li>
+                <li>It combines these resources to display the page.</li>
+            </ol>
+            <p>HTML describes the content. CSS controls its appearance. JavaScript can add programmed behaviour, but a useful website can also consist of linked HTML pages and CSS alone.</p>
+        </section>
+        <section id="addresses">
+            <h2>4. Understanding a web address</h2>
+            <p>A <strong>URI</strong> identifies a resource. A <strong>URL</strong> is a type of URI that describes how to locate or access it. In everyday browsing, the address you enter is a URL.</p>
+            <pre><code>https://example.com:443/courses/web.html?unit=1#topics</code></pre>
+            <div class="table-wrap"><table><caption>Parts of the example URL</caption><thead><tr><th scope="col">Part</th><th scope="col">Meaning</th></tr></thead><tbody>
+                <tr><td><code>https</code></td><td>The scheme: how to access the resource.</td></tr>
+                <tr><td><code>example.com</code></td><td>The domain name identifying the host.</td></tr>
+                <tr><td><code>:443</code></td><td>The port. HTTPS normally uses 443, so it is often omitted.</td></tr>
+                <tr><td><code>/courses/web.html</code></td><td>The path of the resource.</td></tr>
+                <tr><td><code>?unit=1</code></td><td>A query containing an extra value.</td></tr>
+                <tr><td><code>#topics</code></td><td>A fragment pointing to a place within the page. This part is handled by the browser.</td></tr>
+            </tbody></table></div>
+            <p><strong>DNS</strong>, the Domain Name System, helps translate domain names into IP addresses. People remember names more easily, while network communication uses addresses. DNS is like a contact list that helps you find the address associated with a name.</p>
+        </section>
+        <section id="http">
+            <h2>5. HTTP and HTTPS</h2>
+            <p><strong>HTTP</strong> is a protocol: a set of communication rules for requests and responses. <strong>HTTPS</strong> protects HTTP communication using TLS. It encrypts data in transit and helps the browser authenticate the server.</p>
+            <h3>Request methods</h3>
+            <ul>
+                <li><code>GET</code> asks for a resource, such as a lecture page.</li>
+                <li><code>POST</code> submits data for processing, such as form details.</li>
+                <li><code>PUT</code> usually replaces a resource, while <code>PATCH</code> applies a partial update.</li>
+                <li><code>DELETE</code> requests removal of a resource.</li>
+            </ul>
+            <h3>Response status codes</h3>
+            <p>A response includes a status code describing the outcome. The first digit tells you the general category.</p>
+            <div class="table-wrap"><table><caption>HTTP status families</caption><thead><tr><th scope="col">Family</th><th scope="col">Meaning</th><th scope="col">Example</th></tr></thead><tbody>
+                <tr><td>1xx</td><td>Information about progress</td><td>100 Continue</td></tr>
+                <tr><td>2xx</td><td>Success</td><td>200 OK</td></tr>
+                <tr><td>3xx</td><td>Redirection-related response</td><td>301 Moved Permanently</td></tr>
+                <tr><td>4xx</td><td>A request-related problem</td><td>404 Not Found</td></tr>
+                <tr><td>5xx</td><td>A server-side problem</td><td>500 Internal Server Error</td></tr>
+            </tbody></table></div>
+            <p><strong>Headers</strong> carry extra information. For example, <code>Content-Type: text/html</code> tells the browser that the response contains HTML. An <code>Authorization</code> request header can carry credentials for a protected resource.</p>
+            <h3>A small HTML response</h3>
+            <p>The server might return HTML containing the following elements. The browser displays the heading and paragraph instead of showing the tags themselves.</p>
+            <pre><code>&lt;h2&gt;Welcome to the Web&lt;/h2&gt;
+&lt;p&gt;A browser displays the content of this page.&lt;/p&gt;</code></pre>
+            <p class="example-label">Browser result</p>
+            <div class="output"><h2>Welcome to the Web</h2><p>A browser displays the content of this page.</p></div>
+        </section>
+        <div class="practice"><p><strong>Try it yourself</strong></p><ol><li>Explain the difference between the Internet and the Web in your own words.</li><li>Identify the domain, path and fragment in <code>https://example.com/notes.html#css</code>.</li><li>Save the HTML example in a file and open it. Which part of the process changes when you open a local file instead of a hosted page?</li></ol></div>
+        <nav class="page-nav" aria-label="Page navigation"><a href="index.html">Home</a><a href="lecture2.html">Next: Web applications &rarr;</a><a href="#top">Back to top</a></nav>
+    </main>
+    <footer class="site-footer container"><p>Web Technologies &middot; Lecture 1</p></footer>
+</body>
+</html>
